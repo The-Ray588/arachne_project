@@ -1,4 +1,4 @@
-export function initParticles() {
+function initParticles() {
     const svg = document.querySelector('.clock-svg');
     if (!svg) return;
     
@@ -6,7 +6,6 @@ export function initParticles() {
     particlesGroup.setAttribute('id', 'particles');
     svg.appendChild(particlesGroup);
     
-    // Создаем 15 золотых пылинок
     for (let i = 0; i < 15; i++) {
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         circle.setAttribute('r', Math.random() * 1.5 + 0.5);
@@ -33,3 +32,5 @@ export function initParticles() {
     
     animateParticles();
 }
+
+initParticles();
