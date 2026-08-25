@@ -1,37 +1,10 @@
-// Импорт плагинов (единственное изменение в ядре)
-import { initSettings } from './settings.js';
-import { initDate } from './date.js';
-import { initParticles } from './particles.js';
-import { initSoundEffects } from './sound_effects.js';
-
-// Глобальный объект для связи между модулями
-window.Clock = { soundEnabled: true };
-
-// Запуск плагинов
-initSettings();
-initDate();
-initParticles();
-initSoundEffects();
-
-// ... (весь остальной ваш код app.js остается без изменений)
-
-// В функции tick() добавьте проверку звука:
-function tick() {
-    initAudio();
-    if (window.Clock.soundEnabled) {
-        playTick();
-    }
-    // ... остальной код
-}
-
-/* =========================================
-   JS (Логика + Звук)
-   ========================================= */
-
 let audioCtx;
 function initAudio() {
     if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // Передаем аудио-контекст для плагинов
+        window.Clock = window.Clock || {};
+        window.Clock.audioCtx = audioCtx;
     }
 }
 
@@ -40,12 +13,11 @@ function playTick() {
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
     
-    // Громкий механический звук "ТИК"
     oscillator.type = 'square'; 
     oscillator.frequency.setValueAtTime(2000, audioCtx.currentTime);
     oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.03);
 
-    gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime); // Громкость
+    gainNode.gain.setValueAtTime(0.25, audioCtx.currentTime);
     gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.06);
 
     oscillator.connect(gainNode);
@@ -76,7 +48,6 @@ function tick() {
     initAudio();
     playTick();
 
-    // Вспышка
     const flash = document.getElementById('flash');
     flash.classList.add('active');
     setTimeout(() => flash.classList.remove('active'), 100);
@@ -100,7 +71,6 @@ function tick() {
     const minRot = forwardOf(minDeg, minEl);
     const hourRot = forwardOf(hourDeg, hourEl);
 
-    // Плавная анимация с пружиной
     secEl.style.transition = 'transform 0.15s cubic-bezier(0.4, 2.08, 0.55, 0.44)';
     minEl.style.transition = 'transform 0.3s cubic-bezier(0.4, 2.08, 0.55, 0.44)';
     hourEl.style.transition = 'transform 0.5s cubic-bezier(0.4, 2.08, 0.55, 0.44)';
@@ -109,8 +79,10 @@ function tick() {
     minEl.style.transform = `rotate(${minRot}deg)`;
     hourEl.style.transform = `rotate(${hourRot}deg)`;
 
+    // Отправляем событие для всех плагинов
+    window.dispatchEvent(new Event('clock-tick'));
+
     scheduleTick();
 }
 
-// Запуск
 tick();
