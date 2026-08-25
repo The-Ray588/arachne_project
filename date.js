@@ -1,4 +1,4 @@
-export function initDate() {
+function initDate() {
     const footer = document.querySelector('footer');
     if (!footer) return;
     
@@ -15,5 +15,7 @@ export function initDate() {
     }
     
     updateDate();
-    setInterval(updateDate, 60000); // Обновляем раз в минуту
+    setInterval(updateDate, 60000);
 }
+
+initDate();
