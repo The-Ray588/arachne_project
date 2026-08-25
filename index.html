@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARACHNE — HTML CSS JS</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="ambient">
+    <header>
+        <h1>ARACHNE</h1>
+        <p>CALIBRE 12 SUSPENSION AUTOMATIQUE</p>
+    </header>
+
+    <div class="clock-container">
+        <div class="line"></div>
+
+        <svg class="clock-svg" viewBox="0 0 340 340">
+            <!-- Шестерни -->
+            <g class="gears">
+                <circle cx="170" cy="170" r="70" stroke-width="1.5" stroke-dasharray="6 10"/>
+                <circle cx="110" cy="170" r="35" stroke-dasharray="2 6"/>
+                <circle cx="230" cy="170" r="35" stroke-dasharray="2 6"/>
+                <circle cx="170" cy="110" r="35" stroke-dasharray="2 6"/>
+                <circle cx="170" cy="230" r="35" stroke-dasharray="2 6"/>
+                <path d="M 90 170 Q 170 90 250 170 Q 170 250 90 170" stroke-dasharray="4 12"/>
+                <path d="M 120 220 Q 170 270 220 220" stroke-dasharray="2 4"/>
+                <path d="M 120 120 Q 170 70 220 120" stroke-dasharray="2 4"/>
+            </g>
+
+            <!-- Кольца с метками -->
+            <circle class="ring ring-outer" cx="170" cy="170" r="155" />
+            <circle class="ring ring-inner" cx="170" cy="170" r="145" stroke-dasharray="0.5 14.922" />
+
+            <!-- Цифры -->
+            <g class="numerals">
+                <text x="170" y="40" text-anchor="middle" dominant-baseline="middle">12</text>
+                <text x="232" y="70" text-anchor="middle" dominant-baseline="middle">1</text>
+                <text x="278" y="112" text-anchor="middle" dominant-baseline="middle">2</text>
+                <text x="300" y="170" text-anchor="middle" dominant-baseline="middle">3</text>
+                <text x="278" y="228" text-anchor="middle" dominant-baseline="middle">4</text>
+                <text x="232" y="270" text-anchor="middle" dominant-baseline="middle">5</text>
+                <text x="170" y="300" text-anchor="middle" dominant-baseline="middle">6</text>
+                <text x="108" y="270" text-anchor="middle" dominant-baseline="middle">7</text>
+                <text x="62" y="228" text-anchor="middle" dominant-baseline="middle">8</text>
+                <text x="40" y="170" text-anchor="middle" dominant-baseline="middle">9</text>
+                <text x="62" y="112" text-anchor="middle" dominant-baseline="middle">10</text>
+                <text x="108" y="70" text-anchor="middle" dominant-baseline="middle">11</text>
+            </g>
+
+            <!-- ПАУК -->
+            <g id="spider">
+                <!-- Задние лапки -->
+                <path class="decor-leg" d="M 170 170 Q 120 200 90 240 Q 80 255 75 270" />
+                <path class="decor-leg" d="M 170 170 Q 220 200 250 240 Q 260 255 265 270" />
+                <path class="decor-leg" d="M 170 170 L 160 205 Q 150 220 140 240" />
+
+                <!-- Вращающиеся лапки -->
+                <path id="hand-sec" class="leg" d="M 170 170 L 160 140 L 170 50 L 165 35" />
+                <path id="hand-min" class="leg" d="M 170 170 Q 180 130 215 95 L 210 80" />
+                <path id="hand-hour" class="leg" d="M 170 170 Q 150 140 120 115 L 115 105" />
+
+                <!-- Тело -->
+                <path class="spider-body" d="M 170 170 C 155 155, 145 165, 145 175 C 145 190, 160 195, 170 195 C 180 195, 195 190, 195 175 C 195 165, 185 155, 170 170 Z" />
+                <path class="spider-body" d="M 170 170 C 160 155, 155 160, 155 165 C 155 170, 160 175, 170 175 C 180 175, 185 170, 185 165 C 185 160, 180 155, 170 170 Z" opacity="0.8" />
+                
+                <!-- Вспышка и блики -->
+                <circle class="tick-flash" id="flash" cx="170" cy="170" r="15" fill="rgba(246, 230, 193, 0.3)" />
+                <circle class="highlight" cx="165" cy="168" r="3" />
+                <circle class="highlight" cx="162" cy="162" r="1.5" />
+                <circle class="highlight" cx="180" cy="178" r="2" />
+            </g>
+        </svg>
+    </div>
+
+    <time id="readout">00:00:00</time>
+    <footer>LOCAL TIME / SILK SUSPENSION / NO BATTERIES</footer>
+</div>
+
+<!-- Подключаем JS в самом конце -->
+<script src="app.js"></script>
+
+</body>
+</html>
