@@ -1,3 +1,29 @@
+// Импорт плагинов (единственное изменение в ядре)
+import { initSettings } from './settings.js';
+import { initDate } from './date.js';
+import { initParticles } from './particles.js';
+import { initSoundEffects } from './sound_effects.js';
+
+// Глобальный объект для связи между модулями
+window.Clock = { soundEnabled: true };
+
+// Запуск плагинов
+initSettings();
+initDate();
+initParticles();
+initSoundEffects();
+
+// ... (весь остальной ваш код app.js остается без изменений)
+
+// В функции tick() добавьте проверку звука:
+function tick() {
+    initAudio();
+    if (window.Clock.soundEnabled) {
+        playTick();
+    }
+    // ... остальной код
+}
+
 /* =========================================
    JS (Логика + Звук)
    ========================================= */
