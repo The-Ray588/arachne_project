@@ -1,0 +1,155 @@
+/* =========================================
+   CSS (Стили)
+   ========================================= */
+
+:root {
+    --ink-400: #484a57;
+    --ink-500: #171826;
+    --brass-100: #f6e6c1;
+    --brass-500: #a8873f;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    color: var(--brass-100);
+    height: 100vh;
+}
+
+.ambient {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(50% 46% at 50% 44%, rgb(164,135,63,.15), transparent 40%),
+                radial-gradient(120% 90% at 50% 44%, var(--ink-400), var(--ink-500));
+    animation: ambientPulse 6s infinite ease-in-out alternate;
+}
+
+@keyframes ambientPulse {
+    0% { filter: brightness(0.95); }
+    100% { filter: brightness(1.08); }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 8px;
+    opacity: 0.8;
+    user-select: none;
+}
+
+header h1 { font-size: 28px; margin: 0; font-weight: normal; letter-spacing: 10px; }
+header p { font-size: 11px; margin: 5px 0 0; letter-spacing: 4px; color: var(--brass-500); }
+
+.clock-container {
+    position: relative;
+    width: 340px;
+    height: 340px;
+}
+
+.clock-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 25px rgba(246, 230, 193, 0.15));
+}
+
+/* Кольца */
+.ring {
+    fill: none;
+    stroke: rgba(246, 230, 193, 0.15);
+    stroke-width: 4.3;
+}
+.ring-outer { stroke-dasharray: 0.85 14.222; }
+.ring-inner { stroke: rgba(246, 230, 193, 0.05); stroke-width: 2; }
+
+/* Цифры */
+.numerals {
+    font-size: 36px;
+    fill: var(--brass-100);
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+/* Шестерни */
+.gears path, .gears circle {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.06);
+    stroke-width: 2;
+}
+
+/* Лапки (стрелки) */
+.leg {
+    fill: none;
+    stroke: var(--brass-100);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform-origin: 170px 170px;
+}
+
+#hand-sec { stroke-width: 1.2; filter: drop-shadow(0 0 2px var(--brass-100)); }
+#hand-min { stroke-width: 2.2; filter: drop-shadow(0 0 3px var(--brass-100)); }
+#hand-hour { stroke-width: 3.2; filter: drop-shadow(0 0 4px var(--brass-100)); }
+
+/* Задние лапки */
+.decor-leg {
+    stroke: rgba(246, 230, 193, 0.3);
+    stroke-width: 1;
+}
+
+/* Тело паука */
+.spider-body {
+    fill: var(--brass-100);
+    filter: drop-shadow(0 0 8px rgba(246, 230, 193, 0.8));
+    transform-origin: 170px 170px;
+}
+
+/* Блики */
+.highlight {
+    fill: #fff;
+    opacity: 0.9;
+    filter: blur(0.5px);
+}
+
+/* Вспышка при тике */
+.tick-flash {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
+.tick-flash.active {
+    opacity: 1;
+    transition: opacity 0.05s;
+}
+
+/* Нить */
+.line {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    width: 1px;
+    height: 600px;
+    background: linear-gradient(to bottom, transparent, rgba(246, 230, 193, 0.8), transparent);
+    z-index: -1;
+}
+
+/* Табло */
+#readout {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    margin-top: 30px;
+    text-shadow: 0 0 10px rgba(246, 230, 193, 0.5);
+    font-variant-numeric: tabular-nums;
+}
+
+footer {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--brass-500);
+    margin-top: 10px;
+    opacity: 0.6;
+}
