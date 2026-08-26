@@ -1,3 +1,7 @@
+// Вставьте эту строку в самое начало app.js (ПЕРЕД let audioCtx;)
+window.Clock = window.Clock || {};
+window.Clock.eventSink = window;
+
 let audioCtx;
 function initAudio() {
     if (!audioCtx) {
