@@ -1,4 +1,4 @@
-// Модуль: Погода
+// Модуль: Погода (работает без локального сервера)
 window.Clock = window.Clock || {};
 
 function initWeather() {
@@ -17,23 +17,30 @@ function initWeather() {
         try {
             const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,wind_speed_10m&timezone=auto`;
             
-            const fetchWeather = async () => {
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if (data && data.current) {
-                    weatherEl.textContent = `WEATHER: ${data.current.temperature_2m}°C · WIND: ${data.current.wind_speed_10m} km/h`;
+            // Используем XMLHttpRequest вместо fetch, чтобы работать без сервера
+            const request = new XMLHttpRequest();
+            request.open('GET', url, true);
+            request.onload = function() {
+                if (this.status === 200) {
+                    const data = JSON.parse(this.responseText);
+                    if (data && data.current) {
+                        weatherEl.textContent = `WEATHER: ${data.current.temperature_2m}°C · WIND: ${data.current.wind_speed_10m} km/h`;
+                    }
+                } else {
+                    weatherEl.textContent = 'WEATHER: NOT AVAILABLE';
                 }
             };
-            
-            fetchWeather();
+            request.onerror = function() {
+                weatherEl.textContent = 'WEATHER: NOT AVAILABLE';
+            };
+            request.send();
         } catch (error) {
             weatherEl.textContent = 'WEATHER: NOT AVAILABLE';
         }
     }
     
     updateWeather();
-    setInterval(updateWeather, 600000); // Обновляем каждые 10 минут
+    setInterval(updateWeather, 600000); // Обновляем каждые 10 Minuten
 }
 
 initWeather();
