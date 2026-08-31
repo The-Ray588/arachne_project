@@ -148,4 +148,19 @@ footer {
     color: var(--brass-500);
     margin-top: 10px;
     opacity: 0.6;
-                        }
+}
+.control-btn {
+    background: transparent;
+    border: 1px solid #a8873f;
+    color: #a8873f;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.control-btn:hover {
+    background: #a8873f;
+    color: #171826;
+}
