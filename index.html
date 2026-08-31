@@ -71,6 +71,19 @@
     <footer>LOCAL TIME / SILK SUSPENSION / NO BATTERIES</footer>
 </div>
 
+<!-- Блок с кнопками (Control Panel) -->
+<div class="controls" style="position:fixed; bottom:20px; left:20px; display:flex; flex-direction:column; gap:10px; z-index:10;">
+    <button id="btn-ambient" class="control-btn">AMBIENT</button>
+    <button id="btn-daylight" class="control-btn">DAYLIGHT</button>
+    <button id="btn-sound" class="control-btn">SOUND: ON</button>
+    <button id="btn-voice" class="control-btn">VOICE: OFF</button>
+    <button id="btn-alarm" class="control-btn">ALARM: SET</button>
+    <button id="btn-timezone" class="control-btn">TZ: LOCAL</button>
+    <button id="btn-countdown" class="control-btn">COUNTDOWN: SET</button>
+    <button id="btn-music" class="control-btn">MUSIC: OFF</button>
+    <button id="btn-track" class="control-btn">TRACK: 1</button>
+</div>
+
 <!-- Подключение всех скриптов -->
 <script src="app.js"></script>
 <script src="settings.js"></script>
@@ -90,10 +103,11 @@
 <script src="clock_settings.js"></script>
 <script src="sound_customizer.js"></script>
 <script src="sound_settings.js"></script>
-
-<!-- НОВЫЕ ПЛАГИНЫ -->
 <script src="black_hole.js"></script>
 <script src="spider_physics.js"></script>
+
+<!-- НОВЫЙ ПЛАГИН -->
+<script src="background_music.js"></script>
 
 </body>
     </html>
