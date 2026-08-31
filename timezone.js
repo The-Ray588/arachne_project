@@ -1,23 +1,20 @@
-// Модуль: Часовой пояс
 window.Clock = window.Clock || {};
 
 function initTimezone() {
-    const btn = document.createElement('button');
-    btn.textContent = 'TZ: LOCAL';
-    btn.style.cssText = "position:fixed; bottom:170px; left:20px; background:transparent; border:1px solid #a8873f; color:#a8873f; font-family:monospace; padding:5px 10px; cursor:pointer; font-size:11px;";
-    document.body.appendChild(btn);
+    const btn = document.getElementById('btn-timezone');
+    if (btn) {
+        btn.textContent = 'TZ: LOCAL';
+        btn.addEventListener('click', () => {
+            const input = prompt('Введите часовой пояс (например: Europe/London, America/New_York или LOCAL):', selectedTimezone);
+            if (input) {
+                selectedTimezone = input;
+                btn.textContent = `TZ: ${selectedTimezone.toUpperCase()}`;
+            }
+        });
+    }
     
     let selectedTimezone = 'local';
     
-    btn.addEventListener('click', () => {
-        const input = prompt('Введите часовой пояс (например: Europe/London, America/New_York или LOCAL):', selectedTimezone);
-        if (input) {
-            selectedTimezone = input;
-            btn.textContent = `TZ: ${selectedTimezone.toUpperCase()}`;
-        }
-    });
-    
-    // Слушаем событие тика
     window.addEventListener('clock-tick', () => {
         const now = new Date();
         let timeString = now.toTimeString().split(' ')[0];
