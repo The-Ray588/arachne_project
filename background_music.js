@@ -1,4 +1,3 @@
-// Модуль: Фоновая музыка (Web Audio API — Без сервера)
 window.Clock = window.Clock || {};
 
 function initBackgroundMusic() {
@@ -7,7 +6,7 @@ function initBackgroundMusic() {
     gainNode.gain.value = 0.3;
     gainNode.connect(audioCtx.destination);
     
-    // Создаем кнопку
+    // Кнопка музыка
     const btn = document.getElementById('btn-music');
     if (btn) {
         btn.textContent = 'MUSIC: OFF';
@@ -27,13 +26,6 @@ function initBackgroundMusic() {
     let currentTrack = 0;
     let timer = null;
     
-    // Список эмбиент-треков
-    const tracks = [
-        { tempo: 60, notes: [220, 330, 440, 550] },      // Спокойный
-        { tempo: 90, notes: [180, 270, 360, 450] },       // Атмосферный
-        { tempo: 120, notes: [160, 240, 320, 400] },      // Загадочный
-    ];
-    
     // Кнопка переключения треков
     const trackBtn = document.getElementById('btn-track');
     if (trackBtn) {
@@ -48,6 +40,13 @@ function initBackgroundMusic() {
             }
         });
     }
+    
+    // Список эмбиент-треков
+    const tracks = [
+        { tempo: 60, notes: [220, 330, 440, 550] },      // Спокойный
+        { tempo: 90, notes: [180, 270, 360, 450] },       // Атмосферный
+        { tempo: 120, notes: [160, 240, 320, 400] },      // Загадочный
+    ];
     
     // Функция генерации музыкальной ноты
     function generateNote(frequency, duration) {
