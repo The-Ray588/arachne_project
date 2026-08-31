@@ -1,4 +1,3 @@
-// Локальное хранилище для настроек
 window.Clock = window.Clock || { soundEnabled: true };
 
 function saveSettings() {
@@ -23,7 +22,7 @@ function loadSettings() {
     }
 }
 
-// Добавляем ползунок яркости
+// Ползунок яркости (мы создаем, потому что это не кнопка)
 function addBrightnessSlider() {
     const slider = document.createElement('div');
     slider.innerHTML = `
@@ -40,39 +39,36 @@ function addBrightnessSlider() {
     });
 }
 
-// Добавляем кнопку темы
+// Кнопка темы
 function addThemeToggle() {
-    const btn = document.createElement('button');
-    btn.textContent = 'DAYLIGHT';
-    btn.style.cssText = "position:fixed; bottom:20px; left:20px; background:transparent; border:1px solid #a8873f; color:#a8873f; font-family:monospace; padding:5px 10px; cursor:pointer;";
-    document.body.appendChild(btn);
-    
-    btn.addEventListener('click', () => {
-        document.body.classList.toggle('daylight');
-        if (document.body.classList.contains('daylight')) {
-            btn.textContent = 'NIGHT';
-        } else {
-            btn.textContent = 'DAYLIGHT';
-        }
-        saveSettings();
-    });
+    const btn = document.getElementById('btn-daylight');
+    if (btn) {
+        btn.textContent = 'DAYLIGHT';
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('daylight');
+            if (document.body.classList.contains('daylight')) {
+                btn.textContent = 'NIGHT';
+            } else {
+                btn.textContent = 'DAYLIGHT';
+            }
+            saveSettings();
+        });
+    }
 }
 
-// Добавляем кнопку звука
+// Кнопка звука
 function addSoundToggle() {
-    const btn = document.createElement('button');
-    btn.textContent = window.Clock.soundEnabled ? 'SOUND: ON' : 'SOUND: OFF';
-    btn.style.cssText = "position:fixed; bottom:60px; left:20px; background:transparent; border:1px solid #a8873f; color:#a8873f; font-family:monospace; padding:5px 10px; cursor:pointer;";
-    document.body.appendChild(btn);
-    
-    btn.addEventListener('click', () => {
-        window.Clock.soundEnabled = !window.Clock.soundEnabled;
+    const btn = document.getElementById('btn-sound');
+    if (btn) {
         btn.textContent = window.Clock.soundEnabled ? 'SOUND: ON' : 'SOUND: OFF';
-        saveSettings();
-    });
+        btn.addEventListener('click', () => {
+            window.Clock.soundEnabled = !window.Clock.soundEnabled;
+            btn.textContent = window.Clock.soundEnabled ? 'SOUND: ON' : 'SOUND: OFF';
+            saveSettings();
+        });
+    }
 }
 
-// Запуск
 loadSettings();
 addBrightnessSlider();
 addThemeToggle();
