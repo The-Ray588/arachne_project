@@ -1,28 +1,24 @@
-// Модуль: Звук часов с настройкой
 window.Clock = window.Clock || {};
 
 function initSoundCustomizer() {
-    const btn = document.createElement('button');
-    btn.textContent = 'SOUND STYLE';
-    btn.style.cssText = "position:fixed; bottom:320px; left:20px; background:transparent; border:1px solid #a8873f; color:#a8873f; font-family:monospace; padding:5px 10px; cursor:pointer; font-size:11px;";
-    document.body.appendChild(btn);
+    const btn = document.getElementById('btn-soundstyle');
+    if (btn) {
+        btn.textContent = 'SOUND STYLE';
+        btn.addEventListener('click', () => {
+            const style = prompt('Введите стиль звука: default, low, soft или sharp:', soundStyle);
+            if (style) {
+                soundStyle = style;
+                localStorage.setItem('arachne_sound_style', style);
+                
+                if (window.Clock.soundEnabled) {
+                    window.Clock.soundStyle = soundStyle;
+                }
+            }
+        });
+    }
     
     let soundStyle = localStorage.getItem('arachne_sound_style') || 'default';
     
-    btn.addEventListener('click', () => {
-        const style = prompt('Введите стиль звука: default, low, soft или sharp:', soundStyle);
-        if (style) {
-            soundStyle = style;
-            localStorage.setItem('arachne_sound_style', style);
-            
-            // Обновляем звук
-            if (window.Clock.soundEnabled) {
-                window.Clock.soundStyle = soundStyle;
-            }
-        }
-    });
-    
-    // Слушаем событие тика
     window.addEventListener('clock-tick', () => {
         if (window.Clock.soundEnabled) {
             const audioCtx = window.Clock.audioCtx;
