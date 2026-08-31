@@ -1,21 +1,28 @@
-// Модуль: Мигающие двоеточия
 window.Clock = window.Clock || {};
 
 function initBlinkingColon() {
-    const readout = document.getElementById('readout');
-    if (!readout) return;
+    const btn = document.getElementById('btn-blink');
+    if (btn) {
+        btn.textContent = 'BLINK: ON';
+        btn.addEventListener('click', () => {
+            blinkingEnabled = !blinkingEnabled;
+            btn.textContent = blinkingEnabled ? 'BLINK: ON' : 'BLINK: OFF';
+        });
+    }
     
-    // Обновляем текст каждую секунду
+    let blinkingEnabled = true;
+    
     window.addEventListener('clock-tick', () => {
-        const now = new Date();
-        const h = String(now.getHours()).padStart(2, '0');
-        const m = String(now.getMinutes()).padStart(2, '0');
-        const s = String(now.getSeconds()).padStart(2, '0');
-        
-        // Мигание двоеточия: каждую секунду оно меняет состояние
-        const blinkingColon = Math.floor(Date.now() / 1000) % 2 === 0 ? ':' : ' ';
-        
-        readout.textContent = `${h}${blinkingColon}${m}${blinkingColon}${s}`;
+        if (blinkingEnabled) {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            
+            const blinkingColon = Math.floor(Date.now() / 1000) % 2 === 0 ? ':' : ' ';
+            
+            readout.textContent = `${h}${blinkingColon}${m}${blinkingColon}${s}`;
+        }
     });
 }
 
